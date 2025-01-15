@@ -1,36 +1,48 @@
-// src/components/Login.js
-
-import React, { useState } from 'react';
-import { loginUser } from '../firebase'; // Adjust the path as needed
+import React, { useState } from "react";
+import { TextField, Button, Typography, Box } from "@mui/material";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    await loginUser(email, password);
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/profile");
+    } catch (error) {
+      setError("Invalid credentials. Please try again.");
+    }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <Box sx={{ maxWidth: 400, margin: "auto", padding: "20px", boxShadow: 3 }}>
+      <Typography variant="h5">Login</Typography>
+      {error && <Typography color="error">{error}</Typography>}
+      <TextField
+        label="Email"
+        type="email"
+        fullWidth
+        margin="normal"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <TextField
+        label="Password"
+        type="password"
+        fullWidth
+        margin="normal"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button variant="contained" color="primary" fullWidth onClick={handleLogin}>
+        Login
+      </Button>
+    </Box>
   );
 };
 
