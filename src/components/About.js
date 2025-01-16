@@ -7,10 +7,10 @@ const About = () => {
     <div style={{ backgroundColor: '#F9F9F9', minHeight: '100vh', padding: '0' }}>
       <Container sx={{ marginTop: 5, padding: '20px 0' }}>
         
-        {/* About Section with Fade-in and Scale-up animation */}
+        {/* About Section with Fade-in animation */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
           <Box sx={{ textAlign: 'center', marginBottom: 5 }}>
@@ -39,43 +39,11 @@ const About = () => {
           </Box>
         </motion.div>
 
-        {/* Project's Impact with Slide-in from the right */}
+        {/* Technologies Used with Scale-up animation */}
         <motion.div
-          initial={{ x: 200, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
-        >
-          <Box sx={{ marginBottom: 5 }}>
-            <Typography variant="h4" component="h2" gutterBottom sx={{ color: '#388E3C' }}>
-              Project's Impact
-            </Typography>
-            <Typography variant="body1" sx={{ fontWeight: 300, color: '#333', lineHeight: 1.8 }}>
-              Our project aims to streamline the research process by offering personalized recommendations, a structured taxonomy of academic tools, and a guidance resource center. This will help researchers save time, increase efficiency, and make more informed decisions, ultimately driving academic productivity to new heights.
-            </Typography>
-          </Box>
-        </motion.div>
-
-        {/* Team and Supervision with Slide-in from the bottom */}
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-        >
-          <Box sx={{ marginBottom: 5 }}>
-            <Typography variant="h4" component="h2" gutterBottom sx={{ color: '#388E3C' }}>
-              Team and Supervision
-            </Typography>
-            <Typography variant="body1" sx={{ fontWeight: 300, color: '#333', lineHeight: 1.8 }}>
-              The project is supervised by Dr. Azza Zeinelabdin Karrar, an expert in Information Technology and AI. Dr. Karrar's guidance ensures the research and development of this tool are aligned with the latest academic and technological standards, providing the best possible outcomes for the research community.
-            </Typography>
-          </Box>
-        </motion.div>
-
-        {/* Technologies Used with Scale-up and Rotate animation */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 1 }}
         >
           <Box sx={{ marginBottom: 5 }}>
             <Typography variant="h4" component="h2" gutterBottom sx={{ color: '#388E3C' }}>
@@ -110,11 +78,11 @@ const About = () => {
           </Box>
         </motion.div>
 
-        {/* User Benefits with Fade-in, Scale-up, and Rotate */}
+        {/* User Benefits with Fade-in animation */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
         >
           <Box sx={{ marginBottom: 5 }}>
             <Typography variant="h4" component="h2" gutterBottom sx={{ color: '#388E3C' }}>

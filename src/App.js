@@ -19,8 +19,31 @@ import PrivateRoute from "./components/PrivateRoute";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.error("Error captured by ErrorBoundary:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong. Please try again later.</h1>;
+    }
+    return this.props.children;
+  }
+}
+
 function App() {
   const [user, setUser] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -30,50 +53,49 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  return (
-    <Router>
-      <Header user={user} />
-      <Container style={{ marginTop: "20px" }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/search" element={<Search />} /> {/* Ensure this is rendered */}
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+  };
 
-          {/* Private Routes */}
-          <Route
-            path="/create-profile"
-            element={
-              <PrivateRoute>
-                <CreateProfile />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/profilepage"
-            element={
-              <PrivateRoute>
-                <ProfilePage />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/recommendations" element={<Recommendations />} />
-        </Routes>
-      </Container>
-      <Footer />
-    </Router>
+  const handleLogout = () => {
+    auth.signOut().then(() => {
+      setUser(null);
+    });
+  };
+
+  return (
+    <ErrorBoundary>
+      <Router>
+        <Header user={user} onLogout={handleLogout} />
+        <Container sx={{ marginTop: 2 }}>
+          <Routes>
+            <Route path="/" element={<Home searchResults={searchResults} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/search" element={<Search onSearch={handleSearchResults} />} />
+
+            <Route
+              path="/create-profile"
+              element={<PrivateRoute><CreateProfile /></PrivateRoute>}
+            />
+            <Route
+              path="/profile"
+              element={<PrivateRoute><Profile /></PrivateRoute>}
+            />
+            <Route
+              path="/profilepage"
+              element={<PrivateRoute><ProfilePage /></PrivateRoute>}
+            />
+            <Route path="/recommendations" element={<Recommendations />} />
+          </Routes>
+        </Container>
+        <Footer />
+      </Router>
+    </ErrorBoundary>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "../firebase";  // Ensure this path is correct
+import { auth } from "../firebase"; // Ensure this path is correct
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Grid, Typography, Container, Box } from "@mui/material";
@@ -38,12 +38,16 @@ const Signup = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ marginTop: 5 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+      <Box sx={{ marginTop: 5, padding: 4, boxShadow: 3, borderRadius: "8px", backgroundColor: "#f9f9f9" }}>
+        <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 600 }}>
           Sign Up
         </Typography>
 
-        {error && <Typography color="error" align="center">{error}</Typography>}
+        {error && (
+          <Typography color="error" align="center" sx={{ marginBottom: 2 }}>
+            {error}
+          </Typography>
+        )}
 
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -55,6 +59,7 @@ const Signup = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                sx={{ '& .MuiInputBase-root': { borderRadius: 4 } }}
               />
             </Grid>
 
@@ -67,6 +72,7 @@ const Signup = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                sx={{ '& .MuiInputBase-root': { borderRadius: 4 } }}
               />
             </Grid>
 
@@ -79,6 +85,7 @@ const Signup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                sx={{ '& .MuiInputBase-root': { borderRadius: 4 } }}
               />
             </Grid>
 
@@ -91,6 +98,7 @@ const Signup = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                sx={{ '& .MuiInputBase-root': { borderRadius: 4 } }}
               />
             </Grid>
 
@@ -98,9 +106,14 @@ const Signup = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                color="success"  // Green button
                 fullWidth
-                sx={{ marginTop: 2 }}
+                sx={{
+                  marginTop: 2,
+                  padding: "10px 0",
+                  borderRadius: 4,
+                  '&:hover': { backgroundColor: "#388e3c" },
+                }}
               >
                 Sign Up
               </Button>
@@ -112,7 +125,11 @@ const Signup = () => {
           <Grid item>
             <Typography variant="body2">
               Already have an account?{" "}
-              <Button color="primary" onClick={() => navigate("/login")}>
+              <Button 
+                color="success"  // Green button
+                onClick={() => navigate("/login")} 
+                sx={{ textTransform: "none" }}
+              >
                 Log In
               </Button>
             </Typography>

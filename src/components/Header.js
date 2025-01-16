@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, Button, Typography } from "@mui/material";
+import { AppBar, Toolbar, Button, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";  // Import the signOut function from Firebase
 import { auth } from "../firebase";  // Import auth from your firebase configuration
@@ -16,40 +16,42 @@ const Header = ({ user }) => {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{ backgroundColor: "#388e3c", boxShadow: 4 }}>
       <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 600 }}>
           AI Tool System
         </Typography>
-        <Button component={Link} to="/" color="inherit">
-          Home
-        </Button>
-        <Button component={Link} to="/about" color="inherit">
-          About
-        </Button>
-        <Button component={Link} to="/contact" color="inherit">
-          Contact
-        </Button>
-        
-        {user ? (
-          <>
-            <Button component={Link} to="/profile" color="inherit">
-              Profile
-            </Button>
-            <Button onClick={handleLogout} color="inherit">
-              Logout
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button component={Link} to="/login" color="inherit">
-              Login
-            </Button>
-            <Button component={Link} to="/signup" color="inherit">
-              Sign Up
-            </Button>
-          </>
-        )}
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Button component={Link} to="/" color="inherit" sx={{ '&:hover': { backgroundColor: "#2c6b2f" } }}>
+            Home
+          </Button>
+          <Button component={Link} to="/about" color="inherit" sx={{ '&:hover': { backgroundColor: "#2c6b2f" } }}>
+            About
+          </Button>
+          <Button component={Link} to="/contact" color="inherit" sx={{ '&:hover': { backgroundColor: "#2c6b2f" } }}>
+            Contact
+          </Button>
+          
+          {user ? (
+            <>
+              <Button component={Link} to="/profile" color="inherit" sx={{ '&:hover': { backgroundColor: "#2c6b2f" } }}>
+                Profile
+              </Button>
+              <Button onClick={handleLogout} color="inherit" sx={{ '&:hover': { backgroundColor: "#2c6b2f" } }}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button component={Link} to="/login" color="inherit" sx={{ '&:hover': { backgroundColor: "#2c6b2f" } }}>
+                Login
+              </Button>
+              <Button component={Link} to="/signup" color="inherit" sx={{ '&:hover': { backgroundColor: "#2c6b2f" } }}>
+                Sign Up
+              </Button>
+            </>
+          )}
+        </Box>
       </Toolbar>
     </AppBar>
   );

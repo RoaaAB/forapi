@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Box, Typography, Button, Grid } from '@mui/material';
+import { Container, Box, Typography, Button, Grid, TextField, InputAdornment, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import myImage1 from '../assets/home/compare-5201278_1280.jpg';
 import myImage2 from '../assets/home/pexels-anete-lusina-4792285.jpg';
 import myImage3 from '../assets/home/pexels-ron-lach-9783353.jpg';
-import myImage4 from '../assets/home/Untitled design.png';
-import myImage5 from '../assets/home/DALL·E 2025-01-14 16.49.09 - An academic research website homepage with a clean and modern design, featuring a background image related to research tools, academic collaboration, .webp'
+import myImage5 from '../assets/home/DALL·E 2025-01-14 16.49.09 - An academic research website homepage with a clean and modern design, featuring a background image related to research tools, academic collaboration, .webp';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -52,6 +52,45 @@ const Home = () => {
           >
             Start Your Research Journey
           </Button>
+        </Box>
+
+        {/* Search Bar Section */}
+        <Box sx={{ marginTop: 4, textAlign: 'center' }}>
+          <TextField
+            variant="outlined"
+            placeholder="Search tools..."
+            fullWidth
+            sx={{
+              marginTop: 2,
+              borderRadius: '8px',
+              '& .MuiOutlinedInput-root': {
+                padding: '10px 15px',
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #BDBDBD',
+                transition: 'border 0.3s ease',
+                '&:hover': {
+                  borderColor: '#66BB6A', // Change border color on hover
+                },
+                '&.Mui-focused': {
+                  borderColor: '#66BB6A', // Focused state color
+                  boxShadow: '0 0 5px rgba(102, 187, 106, 0.5)',
+                },
+              },
+              '& .MuiInputBase-input': {
+                fontSize: '16px',
+                padding: '10px 12px',
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton edge="start" color="primary">
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Box>
 
         {/* Features Section with Larger Images and Animations */}
@@ -147,50 +186,13 @@ const Home = () => {
           </Button>
         </Box>
 
-        {/* Footer with Logo */}
-        <Box sx={{ textAlign: 'center', marginTop: 5, padding: 2, backgroundColor: '#F1F8E9' }}>
-          <img src={myImage4} alt="Logo" width="100" />
-          <Typography variant="body2" sx={{ color: '#388E3C' }}>
-            © 2025 AI-Driven Tool Recommendation System. All rights reserved.
-          </Typography>
-          <Typography variant="body2">
-            Contact us at: <a href="mailto:support@example.com" style={{ color: '#388E3C' }}>support@example.com</a>
+        {/* Footer Section */}
+        <Box sx={{ textAlign: 'center', marginTop: 8, padding: '20px', backgroundColor: '#388E3C', color: '#FFF' }}>
+          <Typography variant="body1" sx={{ fontWeight: 300 }}>
+            © 2025 AI-Driven Tool Recommendation. All rights reserved.
           </Typography>
         </Box>
       </Container>
-
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        @keyframes slideUp {
-          from {
-            transform: translateY(20px);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-        @keyframes bounce {
-          0% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };
