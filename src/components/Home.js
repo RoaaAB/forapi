@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Box, Typography, Button, Grid, TextField, InputAdornment, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import myImage1 from '../assets/home/compare-5201278_1280.jpg';
 import myImage2 from '../assets/home/pexels-anete-lusina-4792285.jpg';
 import myImage3 from '../assets/home/pexels-ron-lach-9783353.jpg';
-import myImage5 from '../assets/home/DALL·E 2025-01-14 16.49.09 - An academic research website homepage with a clean and modern design, featuring a background image related to research tools, academic collaboration, .webp';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   const handleStart = () => {
     navigate("/recommendations");
+  };
+
+  const handleSearch = () => {
+    // Ensure that the search term is passed to the recommendations page
+    navigate("/recommendations", { state: { searchTerm } });
   };
 
   return (
@@ -23,7 +28,6 @@ const Home = () => {
             textAlign: 'center',
             color: '#388E3C',
             padding: '50px 0',
-            backgroundImage: `url(${myImage5})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             borderRadius: '8px',
@@ -81,10 +85,12 @@ const Home = () => {
                 padding: '10px 12px',
               },
             }}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm as user types
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <IconButton edge="start" color="primary">
+                  <IconButton edge="start" color="primary" onClick={handleSearch}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
