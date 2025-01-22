@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Results from "./components/Results"; // Import Results component
+import Guide from "./components/Guide"; // Import Guide component
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -78,7 +79,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/search" element={<Search onSearch={handleSearchResults} />} />
-            <Route path="/results" element={<Results />} /> {/* Add this new route */}
+            <Route path="/results" element={<Results />} />
+            <Route path="/guide" element={<Guide />} /> 
             <Route
               path="/create-profile"
               element={<PrivateRoute><CreateProfile /></PrivateRoute>}

@@ -1,4 +1,3 @@
-// Results.js
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Typography, Grid, Paper } from "@mui/material";
@@ -8,6 +7,7 @@ const Results = () => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
+    // Check if results were passed via the location state
     if (location.state?.results) {
       setResults(location.state.results);
     }
@@ -37,3 +37,4 @@ const Results = () => {
 };
 
 export default Results;
+
